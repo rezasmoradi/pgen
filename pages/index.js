@@ -152,14 +152,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-auto flex dark:bg-gray-800 transition-all bg-slate-300/10" style={{ direction: 'rtl' }}>
+      <div className="w-full h-auto flex mt-10 dark:bg-gray-800 transition-all bg-slate-300/10" style={{ direction: 'rtl' }}>
         <div className="w-full h-auto pl-2 dark:bg-gray-800 transition-all">
           <div style={{ width: '98%', height: 'auto' }} className="border mx-auto mt-px dark:border-gray-600 rounded shadow-sm dark:shadow-slate-600">
-            <div className="w-full h-auto flex flex-col mt-2 mb-8">
+            <div className="w-full h-auto flex flex-col mt-12 mb-8">
               <div className="w-full h-auto grid place-content-center items-center place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-[30%_minmax(40%,_1fr)_30%]">
                 <section className="w-full sm:w-10/12 h-auto mx-auto flex flex-col justify-around lg:mr-8">
                   <TextField
-                    label={'رمز عبور جدید'}
+                    label={'رمز عبور '}
                     id="new_pass"
                     type={textType}
                     value={password}
@@ -184,7 +184,7 @@ export default function Home() {
                   </TextField>
                 </section>
                 <section className="w-full h-auto md:border-r-2 border-gray-400 pr-8 mt-8 md:mt-0">
-                  <span className="inline-block text-medium text-gray-800 dark:text-gray-300 mb-4">رمز عبور امن</span>
+                  <span className="inline-block text-xl text-gray-800 dark:text-gray-300 mb-4">رمز عبور امن</span>
                   <ul>
                     <li className="flex justify-start mt-4 mb-4">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6" style={{ color: password.length !== 0 ? password.length < 8 ? 'rgb(239 68 68)' : 'rgb(132 204 22)' : 'rgb(51 65 85)' }}>
@@ -209,7 +209,7 @@ export default function Home() {
                         <path strokeLinecap="round" d="M3 12h18" />
                       </svg>
                       <span className="px-2 text-sm lg:text-base sm:whitespace-nowrap text-gray-800 dark:text-gray-300">شامل حداقل یکی از کاراکترهای خاص مانند</span>
-                      <span className="text-primary text-sm lg:text-base font-medium">
+                      <span className="text-primary text-sm lg:text-base font-medium font-mono">
                         ! | @ | # | $ | &
                       </span>
                       <span className="pr-2 text-sm lg:text-base text-gray-800 dark:text-gray-300">است</span>
@@ -233,7 +233,7 @@ export default function Home() {
                   </div>
                 </section>
                 <section className="w-full col-span-full lg:col-span-1 sm:w-10/12 h-full lg:border-r-2 border-gray-400 mx-8 pr-2 lg:pr-8 mt-8 md:mt-0">
-                  <span className="hidden md:inline-block text-medium text-gray-800 dark:text-gray-300 mb-6">تولید رمز عبور ترکیبی</span>
+                  <span className="hidden md:inline-block text-xl text-gray-800 dark:text-gray-300 mb-6">تولید رمز عبور ترکیبی</span>
                   <div className="w-auto h-auto hidden md:flex flex-col justify-around">
                     <Checkbox label={'اعداد'} defaultChecked onChange={e => { handleComposition(e.target.checked, 'number') }} />
                     <Checkbox label={'حروف کوچک انگلیسی'} defaultChecked onChange={e => { handleComposition(e.target.checked, 'lowercase') }} />
