@@ -2,9 +2,9 @@ import React from "react";
 
 const TextField = React.forwardRef((props, ref) => {
 
-    const inputRef = useRef();
+    const inputRef = React.useRef();
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.value === undefined || props.value === null || props.value === '') {
             inputRef.current.firstChild.innerHTML = '';
         } else {
@@ -12,7 +12,7 @@ const TextField = React.forwardRef((props, ref) => {
         }
     }, [inputRef.current]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.value !== '' && props.type !== 'file') {
             inputRef.current.children[1].classList.remove('msm:flex');
             inputRef.current.children[1].classList.add('hidden');
