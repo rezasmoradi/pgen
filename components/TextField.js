@@ -1,7 +1,7 @@
 import React from "react";
 
 const TextField = React.forwardRef((props, ref) => {
-    
+
     const inputRef = useRef();
 
     useEffect(() => {
@@ -30,7 +30,6 @@ const TextField = React.forwardRef((props, ref) => {
 
         if (typeof onChange === 'function') onChange(e);
     };
-
 
     return (
         <div className={`w-full h-16 my-1 flex relative ${props.className}`}>
