@@ -13,21 +13,13 @@ const TextField = React.forwardRef((props, ref) => {
     }, [inputRef.current]);
 
     React.useEffect(() => {
-        if (props.value !== '' && props.type !== 'file') {
+        if (props.value !== '') {
             inputRef.current.children[1].classList.remove('msm:flex');
             inputRef.current.children[1].classList.add('hidden');
         }
     }, [props.value]);
 
     const changeInput = e => {
-        if (props.type === 'file') {
-            inputRef.current.children[2].children[1].classList.remove('opacity-0');
-            inputRef.current.children[2].children[2].classList.remove('opacity-0');
-            inputRef.current.children[2].children[1].src = URL.createObjectURL(e.currentTarget.files[0]);
-            inputRef.current.children[2].children[2].innerHTML = e.currentTarget.value.split(/[\/|\\]/).pop();
-            inputRef.current.children[1].firstChild.classList.add('hidden');
-        }
-
         if (typeof onChange === 'function') onChange(e);
     };
 
@@ -36,7 +28,7 @@ const TextField = React.forwardRef((props, ref) => {
             <fieldset ref={inputRef} className={`w-full relative border rounded bg-slate-50 dark:bg-slate-700 disabled:border-slate-100 disabled:bg-white disabled:dark:bg-slate-800 disabled:dark:border-slate-700 ${props.error ? 'border-red-500 animate-fade' : 'dark:border-slate-500'}`}>
                 <legend className="text-xs h-4 font-medium transition-all text-gray-700 dark:text-gray-300" />
                 <label htmlFor={props.id} className={`hidden w-full absolute top-2 left-1 font-medium mr-3 text-sm text-gray-600 dark:text-gray-300 msm:flex`}>
-                    <span className={`${props.type !== 'file' && 'hidden'} text-right pr-4 pt-0.5`}>
+                    <span className={`text-right pr-4 pt-0.5`}>
                         {props.label}
                     </span>
                     {props.icon}
@@ -52,8 +44,9 @@ const TextField = React.forwardRef((props, ref) => {
                         disabled={props.disabled || false}
                         multiple={props.multiline}
                         placeholder={props.label}
+                        style={{ direction: props.type === 'text' ? 'ltr' : 'rtl' }}
                         value={props.value || ''}
-                        className={`w-full h-10 ${props.type === 'file' && 'opacity-0'} placeholder:text-right placeholder:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 text-sm sm:text-base select-none px-3 py-1 outline-none text-gray-900 dark:text-gray-300 font-medium bg-slate-100/10 dark:bg-slate-700 rounded ${props.type === 'password' && 'rtl'} disabled:opacity-60 disabled:cursor-not-allowed ${props.value && props.value !== '' && typeof props.value !== 'number' && props.value.charCodeAt(0) <= 126 && 'ltr'}`}
+                        className={`w-full h-10 placeholder:text-right placeholder:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 text-sm sm:text-base select-none px-3 py-1 outline-none text-gray-900 dark:text-gray-300 font-medium bg-slate-100/10 dark:bg-slate-700 rounded ${props.type === 'password' && 'text-left tracking-widest'} ${props.type === 'text' && props.value && 'font-mono'} tracking-wider disabled:opacity-60 disabled:cursor-not-allowed ltr`}
                         onFocus={(e) => {
                             if (e.currentTarget.placeholder === props.label) e.currentTarget.placeholder = '';
                             inputRef.current.children[1].classList.remove('msm:flex');
@@ -78,12 +71,6 @@ const TextField = React.forwardRef((props, ref) => {
                             }
                         }}
                     />
-
-                    {props.type === 'file' && <>
-                        <img className="w-10 h-10 opacity-0 absolute left-2 top-0" />
-                        <p className="max-w-full opacity-0 absolute top-2.5 left-20 font-medium text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap ltr" />
-                    </>}
-
                     {props.type === 'number' && <div className="absolute left-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-gray-800 dark:text-gray-300 cursor-pointer" onClick={() => { typeof props.onChange === 'function' && props.onChange(props.value + 1) }}>
                             <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clipRule="evenodd" />
@@ -93,9 +80,6 @@ const TextField = React.forwardRef((props, ref) => {
                         </svg>
                     </div>}
                 </div>
-                {props.required && <div className="float-left py-0.5">
-                    <span className="text-xs text-red-600">اجباری</span>
-                </div>}
             </fieldset>
             {props.children}
         </div>
