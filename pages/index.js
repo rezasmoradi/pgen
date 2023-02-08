@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Head from 'next/head'
 
+import TextField from '@/components/TextField';
+import Checkbox from '@/components/Checkbox';
+import ItemContainer from '@/components/ItemContainer';
+
 export default function Home() {
 
-  const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [composition, setComposition] = useState('0123456789abcdefghijklmnopqrstuvwxyz');
   const [characterLength, setCharacterLength] = useState(10);
@@ -48,7 +51,6 @@ export default function Home() {
     setPassword(shuffledPassword);
     setRepeatPassword(shuffledPassword);
     checkSecurityPassword(shuffledPassword);
-    setCheckMatchPassword(true);
   };
 
   const checkSecurityPassword = (value) => {
@@ -150,7 +152,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-auto flex dark:bg-gray-800 transition-all bg-slate-300/10">
+      <div className="w-full h-auto flex dark:bg-gray-800 transition-all bg-slate-300/10" style={{ direction: 'rtl' }}>
         <div className="w-full h-auto pl-2 dark:bg-gray-800 transition-all">
           <div style={{ width: '98%', height: 'auto' }} className="border mx-auto mt-px dark:border-gray-600 rounded shadow-sm dark:shadow-slate-600">
             <div className="w-full h-auto flex flex-col mt-2 mb-8">
@@ -248,7 +250,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="block md:hidden relative md:static right-0 left-0 mx-auto border-b-2 border-slate-400 py-2">
-                    <ProductItemContainer textItem={'تولید رمز عبور ترکیبی'}>
+                    <ItemContainer textItem={'تولید رمز عبور ترکیبی'}>
                       <Checkbox label={'اعداد'} onChange={e => { handleComposition(e.target.checked, 'number') }} />
                       <Checkbox label={'حروف کوچک انگلیسی'} onChange={e => { handleComposition(e.target.checked, 'lowercase') }} />
                       <Checkbox label={'حروف بزرگ انگلیسی'} onChange={e => { handleComposition(e.target.checked, 'uppercase') }} />
@@ -258,19 +260,13 @@ export default function Home() {
                       </div>
                       <div className="w-full md:w-11/12 h-11 mt-8 flex justify-center">
                         <button className="w-10/12 md:w-32 md:ml-6 lg:ml-0 backdrop-blur-2xl outline-none bg-gradient-to-br from-white/10 to-white/50 dark:from-gray-600/20 dark:to-gray-600/50 border dark:border-slate-600 rounded dark:shadow-slate-700/20 shadow-[0_2px_4px_rgba(0,0,0,0.1)] py-1 px-4 mx-auto text-gray-900 dark:text-gray-300 text-semi-small font-medium md:mx-2 before:content-[''] before:w-0 before:h-0 hover:before:w-full md:hover:before:w-32 hover:before:h-11 before:duration-300 before:rounded before:transition-all before:absolute before:bottom-0 before:left-0 hover:before:bg-gradient-to-tr hover:before:from-slate-400/20 hover:before:to-slate-400/10 dark:hover:before:from-white/20 dark:hover:before:to-white/10"
-                          onClick={() => { setCheckMatchPassword(password === repeatPassword); setError(true); }}>
+                          onClick={() => { setError(true); }}>
                           تولید رمز عبور
                         </button>
                       </div>
-                    </ProductItemContainer>
+                    </ItemContainer>
                   </div>
                 </section>
-              </div>
-              <div className="w-full md:w-11/12 h-11 flex justify-end mt-16 md:mr-16">
-                <button className="w-10/12 md:w-32 md:ml-6 lg:ml-0 backdrop-blur-2xl outline-none bg-gradient-to-br from-white/10 to-white/50 dark:from-gray-600/20 dark:to-gray-600/50 border dark:border-slate-600 rounded dark:shadow-slate-700/20 shadow-[0_2px_4px_rgba(0,0,0,0.1)] py-1 px-4 mx-auto text-gray-900 dark:text-gray-300 text-semi-small font-medium md:mx-2 before:content-[''] before:w-0 before:h-0 hover:before:w-full md:hover:before:w-32 hover:before:h-11 before:duration-300 before:rounded before:transition-all before:absolute before:bottom-0 before:left-0 hover:before:bg-gradient-to-tr hover:before:from-slate-400/20 hover:before:to-slate-400/10 dark:hover:before:from-white/20 dark:hover:before:to-white/10"
-                  onClick={() => { setCheckMatchPassword(password === repeatPassword); setError(true); }}>
-                  تغییر رمز عبور
-                </button>
               </div>
             </div>
           </div>
